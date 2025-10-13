@@ -4,7 +4,7 @@ from constructive import constructive_random, constructive_greedy, constructive_
 from local_search import local_search_best_improvement, local_search_first_improvement
 
 if __name__ == "__main__":
-    path = "prob-software.txt"
+    path = "prob-software2.txt"
     #teste
 
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
