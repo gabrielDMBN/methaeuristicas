@@ -4,13 +4,13 @@ from constructive import constructive_random, constructive_greedy, constructive_
 from local_search import local_search_best_improvement, local_search_first_improvement
 
 if __name__ == "__main__":
-    path = "prob-software2.txt"
+    path = "prob-software7.txt"
     #teste
 
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
-    print(f"Lido: m={m}, n={n}, ne={ne}, b={b}")
+    print(f"Lido: m={m}, n={n}, ne={ne}, b={b}, instância: {path}" )
 
-    run_id = 1  ################################## incrementar para mudar id individualmente de cada execução
+    run_id = 3  ################################## incrementar para mudar id individualmente de cada execução
 
     # RANDOM
     start = time.time()
@@ -37,6 +37,7 @@ if __name__ == "__main__":
     print(f"GRASP: valor {val_grasp}, peso {wt_grasp}/{b}, pacotes {len(pkgs_grasp)}, tempo {elapsed:.4f}s")
 
     # ATIVIDADE 2 - BUSCA LOCAL ------------------------------
+    # ATIVIDADE 3 - METHAEURISTICA GRASP + Local Search------------------------------
     start = time.time()
     refined = local_search_best_improvement(m, b, c, a, pkg_deps, pkgs_grasp)
     elapsed = time.time() - start
