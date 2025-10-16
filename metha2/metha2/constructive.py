@@ -1,4 +1,5 @@
 import random
+import time
 from typing import List, Set, Tuple
 from utils import marginal_cost, solution_value, solution_weight
 
@@ -61,7 +62,7 @@ def constructive_greedy(m, b, c, a, pkg_deps):
 
 # 3 Guloso random (com Rcl)
 def constructive_grasp(m, b, c, a, pkg_deps, iters=50, rcl_size=10, seed=123):
-    rng = random.Random() if seed is None else random.Random(seed)
+    rng = random.Random(time.time() if seed is None else seed)
     best = (0, set())
     for _ in range(iters):
         chosen_pkgs = set()

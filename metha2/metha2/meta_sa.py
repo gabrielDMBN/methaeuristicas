@@ -1,18 +1,16 @@
-# meta_sa.py
 import math, random
 from utils import solution_value, solution_weight
 from local_search import deps_of_solution, delta_cost_swap
 
 # T0 por simulação (γ≈0.95, β≈2 (valores dos slides pra facilitar)), ----------
 # --- CALIBRAÇÃO DE T0 COM LIMITES DE SEGURANÇA ---
+
 def sa_temperature_initial(m, b, c, a, pkg_deps, s_init,
                            SAmax=200, T0=1.0, gamma=0.95, beta=2.0,
-                           max_levels=50, max_neighbor_trials=5, fallback_T0=100.0):
-    import math, random
-    from utils import solution_value, solution_weight
-    from local_search import deps_of_solution
+                           max_levels=50, max_neighbor_trials=5, fallback_T0=100.0, seed=None):
 
-    rng = random.Random()
+    rng = random.Random() if seed is None else random.Random(seed)
+
     T = T0
     level = 0
     while level < max_levels:
@@ -67,12 +65,10 @@ def sa_temperature_initial(m, b, c, a, pkg_deps, s_init,
 # ---------- SA principal (maximização), com resfriamento geométrico ----------
 def simulated_annealing(m, b, c, a, pkg_deps, initial_solution,
                         T0=None, alpha=0.97, SAmax=400, Tfinal=1e-3,
-                        max_neighbor_trials=10):
-    import math, random
-    from utils import solution_value, solution_weight
-    from local_search import deps_of_solution, delta_cost_swap
+                        max_neighbor_trials=10, seed=None):
 
-    rng = random.Random()
+    rng = random.Random() if seed is None else random.Random(seed)
+
     if T0 is None:
         T0 = sa_temperature_initial(m, b, c, a, pkg_deps, initial_solution,
                                     SAmax=min(200, SAmax), T0=1.0, gamma=0.95, beta=2.0,

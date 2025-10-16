@@ -1,4 +1,4 @@
-import time
+import random, time
 from utils import log_execution, read_instance, solution_weight, solution_value
 from constructive import constructive_random, constructive_greedy, constructive_grasp
 from local_search import local_search_best_improvement, local_search_first_improvement
