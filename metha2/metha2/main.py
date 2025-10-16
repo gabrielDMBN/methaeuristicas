@@ -2,6 +2,7 @@ import time
 from utils import log_execution, read_instance, solution_weight, solution_value
 from constructive import constructive_random, constructive_greedy, constructive_grasp
 from local_search import local_search_best_improvement, local_search_first_improvement
+from meta_sa import simulated_annealing
 
 if __name__ == "__main__":
     path = "prob-software7.txt"
@@ -55,6 +56,23 @@ if __name__ == "__main__":
     log_execution(run_id, "LOCAL_FIRST", val_refined, wt_refined, len(refined), b, elapsed)
     print(
         f"Local Search (First): valor {val_refined}, peso {wt_refined}/{b}, pacotes {len(refined)}, tempo {elapsed:.4f}s")
+
+    # -------------------------------------------------
+    # META-HEURÍSTICA 2: SIMULATED ANNEALING
+    # -------------------------------------------------
+    start = time.time()
+    val_sa, pkgs_sa = simulated_annealing(
+        m, b, c, a, pkg_deps, pkgs_grasp,
+        T0=100.0,  # fixa T0 (evita calibrar e garante finalizar)
+        alpha=0.97,  # resfriamento geométrico
+        SAmax=400,  # iterações por temperatura
+        Tfinal=1e-3,  # temperatura final
+        max_neighbor_trials=10  # evita travar tentando vizinhos inviáveis
+    )
+    elapsed = time.time() - start
+    wt_sa = solution_weight(pkgs_sa, pkg_deps, a)
+    log_execution(run_id, "SIMULATED_ANNEALING", val_sa, wt_sa, len(pkgs_sa), b, elapsed)
+    print(f"SIMULATED_ANNEALING valor={val_sa} peso={wt_sa}/{b} pacotes={len(pkgs_sa)} tempo={elapsed:.4f}s")
     #-------------------------------------------------------------
 
     print("\nExecução concluída e salva em resultados.txt")
