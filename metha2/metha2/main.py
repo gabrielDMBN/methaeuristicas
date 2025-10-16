@@ -5,7 +5,7 @@ from local_search import local_search_best_improvement, local_search_first_impro
 from meta_sa import simulated_annealing
 
 if __name__ == "__main__":
-    path = "prob-software7.txt"
+    path = "prob-software2.txt"
     #teste
 
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
@@ -60,19 +60,34 @@ if __name__ == "__main__":
     # -------------------------------------------------
     # META-HEURÍSTICA 2: SIMULATED ANNEALING
     # -------------------------------------------------
+    # --- SA-FAST
     start = time.time()
-    val_sa, pkgs_sa = simulated_annealing(
+    val_sa_fast, pkgs_sa_fast = simulated_annealing(
         m, b, c, a, pkg_deps, pkgs_grasp,
-        T0=100.0,  # fixa T0 (evita calibrar e garante finalizar)
-        alpha=0.97,  # resfriamento geométrico
-        SAmax=400,  # iterações por temperatura
-        Tfinal=1e-3,  # temperatura final
-        max_neighbor_trials=10  # evita travar tentando vizinhos inviáveis
+        T0=80,  # temperatura inicial moderada
+        alpha=0.90,  # esfria mais rápido => menos níveis de T
+        SAmax=120,  # menos iterações por temperatura
+        Tfinal=1e-3,
+        max_neighbor_trials=8
     )
     elapsed = time.time() - start
-    wt_sa = solution_weight(pkgs_sa, pkg_deps, a)
-    log_execution(run_id, "SIMULATED_ANNEALING", val_sa, wt_sa, len(pkgs_sa), b, elapsed)
-    print(f"SIMULATED_ANNEALING valor={val_sa} peso={wt_sa}/{b} pacotes={len(pkgs_sa)} tempo={elapsed:.4f}s")
-    #-------------------------------------------------------------
+    wt = solution_weight(pkgs_sa_fast, pkg_deps, a)
+    log_execution(run_id, "SA_FAST", val_sa_fast, wt, len(pkgs_sa_fast), b, elapsed)
+    print(f"[SA-FAST] valor={val_sa_fast} peso={wt}/{b} pacotes={len(pkgs_sa_fast)} tempo={elapsed:.4f}s")
+
+    # --- SA-QUALITY (tentativa com parametros mais rigidos)
+    start = time.time()
+    val_sa_q, pkgs_sa_q = simulated_annealing(
+        m, b, c, a, pkg_deps, pkgs_grasp,
+        T0=120,  # mais quente => aceita mais pioras no início
+        alpha=0.95,  # esfria devagar => mais níveis de T
+        SAmax=300,  # mais iterações por temperatura
+        Tfinal=1e-3,
+        max_neighbor_trials=12
+    )
+    elapsed = time.time() - start
+    wt = solution_weight(pkgs_sa_q, pkg_deps, a)
+    log_execution(run_id, "SA_QUALITY", val_sa_q, wt, len(pkgs_sa_q), b, elapsed)
+    print(f"[SA-QUALITY] valor={val_sa_q} peso={wt}/{b} pacotes={len(pkgs_sa_q)} tempo={elapsed:.4f}s")
 
     print("\nExecução concluída e salva em resultados.txt")
