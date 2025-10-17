@@ -16,6 +16,12 @@
 | prob-software6.txt | SA_FAST        |         10597.00 |           45890.67 |             2.9163 |  3 |
 | prob-software7.txt | GRASP+LS_FIRST |          9580.67 |           67456.67 |             7.8321 |  3 |
 | prob-software7.txt | SA_FAST        |          9612.00 |           67478.00 |             4.6505 |  3 |
+| prob-software8.txt | GRASP+LS_FIRST |         12813.30 |           11991.70 |             0.5283 |  3 |
+| prob-software8.txt | SA_FAST        |         12813.00 |           11982.30 |             0.4219 |  3 |
+| prob-software9.txt | GRASP+LS_FIRST |         11333.30 |           38872.00 |             2.7756 |  3 |
+| prob-software9.txt | SA_FAST        |         11435.30 |           38865.00 |            2.19733 |  3 |
+| prob-software10.txt| GRASP+LS_FIRST |          9453.67 |           71592.70 |            7.91224 |  3 |
+| prob-software10.txt| SA_FAST        |          9337.33 |            71600.3 |            7.06529 |  3 |
 
 
 
@@ -66,3 +72,24 @@ prob-software7.txt,GRASP+LS_FIRST,9758,67472,8.187851
 prob-software7.txt,SA_FAST,9755,67493,4.526443
 prob-software7.txt,GRASP+LS_FIRST,9386,67487,7.518366
 prob-software7.txt,SA_FAST,9308,67495,4.576148
+
+=======execucoes individuais das instancias da maratona======
+
+prob-software8.txt,GRASP+LS_FIRST,11965,12714,0.537997
+prob-software8.txt,SA_FAST,11937,12713,0.410000
+prob-software8.txt,GRASP+LS_FIRST,12005,12863,0.532002
+prob-software8.txt,SA_FAST,12005,12863,0.428998
+prob-software8.txt,GRASP+LS_FIRST,12005,12863,0.515000
+prob-software8.txt,SA_FAST,12005,12863,0.427000
+prob-software9.txt,GRASP+LS_FIRST,38899,11216,2.816997
+prob-software9.txt,SA_FAST,38824,11310,2.128999
+prob-software9.txt,GRASP+LS_FIRST,38830,11246,2.755000
+prob-software9.txt,SA_FAST,38884,11458,2.232000
+prob-software9.txt,GRASP+LS_FIRST,38887,11538,2.755000
+prob-software9.txt,SA_FAST,38887,11538,2.231000
+prob-software10.txt,GRASP+LS_FIRST,71579,9642,7.841733
+prob-software10.txt,SA_FAST,71583,9405,4.743866
+prob-software10.txt,GRASP+LS_FIRST,71639,9288,7.506000
+prob-software10.txt,SA_FAST,71639,9288,5.017000
+prob-software10.txt,GRASP+LS_FIRST,71560,9431,8.389000
+prob-software10.txt,SA_FAST,71579,9319,11.435000
