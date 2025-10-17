@@ -7,14 +7,14 @@ from meta_sa import simulated_annealing
 
 
 if __name__ == "__main__":
-    path = "prob-software6.txt"
-    #prob-software8 -> prob-software10 instancias da maratona (2,7,28 respectivamente)
+    path = "prob-software9.txt"
+    #prob-software8 ,prob-software9, prob-software10 instancias da maratona (2,7,28 respectivamente)
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
     print(f"Lido: m={m}, n={n}, ne={ne}, b={b}, instância: {path}")
 
     #=====Seeds=====
     run_seed = int(time.time())  # semente baseada no relógio
-    #run_seed = 20251003 # semente definida
+    #run_seed = 1760711790 # semente definida
     random.seed(run_seed)
 
     # ========== META 1: GRASP + Local Search (First fit) ==========
@@ -35,7 +35,7 @@ if __name__ == "__main__":
     pkgs_str, deps_str = binaries_from_solution(pkgs_ls, m, deps_ls, n)
     params_grasp_ls = {
         "grasp_iters": 200,
-        "grasp_rcl_size": 8,
+        "grasp_rcl_size": 10,
         "local_search": "first_improvement",
         "seed": run_seed
     }
@@ -53,11 +53,11 @@ if __name__ == "__main__":
 
     # ========== META 2: Simulated Annealing (preset FAST)
     sa_params = {
-        "T0": 80,
+        "T0": 90,
         "alpha": 0.90,
-        "SAmax": 120,
+        "SAmax": 140,
         "Tfinal": 1e-3,
-        "max_neighbor_trials": 8
+        "max_neighbor_trials": 10
     }
     start = time.time()
     val_sa, pkgs_sa = simulated_annealing(m, b, c, a, pkg_deps, pkgs_grasp,
