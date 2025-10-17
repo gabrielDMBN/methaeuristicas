@@ -21,7 +21,7 @@
 
 
 
--------DADOS DAS EXECUÇÕES INDIVIDUAIS------
+-------DADOS DAS EXECUÇÕES INDIVIDUAIS (caminhos e mais informações de cada execução em experimentos.txt)------
 
 instance_path,method,best_value,total_weight,time_seconds
 prob-software.txt,GRASP+LS_FIRST,11501,12180,0.417106
