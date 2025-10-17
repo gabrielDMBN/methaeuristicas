@@ -79,9 +79,9 @@ if __name__ == "__main__":
     start = time.time()
     val_sa_q, pkgs_sa_q = simulated_annealing(
         m, b, c, a, pkg_deps, pkgs_grasp,
-        T0=120,  # mais quente => aceita mais pioras no início
-        alpha=0.95,  # esfria devagar => mais níveis de T
-        SAmax=300,  # mais iterações por temperatura
+        T0=120,  # mais quente , aceita mais pioras no início
+        alpha=0.95,  # esfria devagar ,mais níveis de T
+        SAmax=300,  # mais iterações , temperatura
         Tfinal=1e-3,
         max_neighbor_trials=12
     )

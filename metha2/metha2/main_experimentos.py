@@ -11,12 +11,12 @@ if __name__ == "__main__":
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
     print(f"Lido: m={m}, n={n}, ne={ne}, b={b}, instância: {path}")
 
-    # semente global desta execução (armazena para reprodução)
+    #=====Seeds=====
     run_seed = int(time.time())  # semente baseada no relógio
     #run_seed = 20251003 # semente definida
     random.seed(run_seed)
 
-    # ========== META 1: GRASP + Local Search (First) ==========
+    # ========== META 1: GRASP + Local Search (First fit) ==========
     # GRASP
     start = time.time()
     val_grasp, pkgs_grasp = constructive_grasp(m, b, c, a, pkg_deps, iters=200, rcl_size=8, seed=run_seed)
@@ -50,7 +50,7 @@ if __name__ == "__main__":
 
     print(f"Local Search (First): valor {val_ls}, peso {wt_ls}/{b}, pacotes {len(pkgs_ls)}, tempo {(t_grasp+t_ls):.4f}s")
 
-    # ========== META 2: Simulated Annealing (preset FAST) ==========
+    # ========== META 2: Simulated Annealing (preset FAST)
     sa_params = {
         "T0": 80,
         "alpha": 0.90,
