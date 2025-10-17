@@ -1,19 +1,19 @@
 import random, time
-from utils import log_execution, read_instance, solution_weight, solution_value, log_experiment_detail, \
- deps_of_solution, binaries_from_solution
-from constructive import constructive_random, constructive_greedy, constructive_grasp
-from local_search import local_search_best_improvement, local_search_first_improvement
+from utils import read_instance, solution_value, log_experiment_detail, \
+deps_of_solution, binaries_from_solution
+from constructive import constructive_grasp
+from local_search import local_search_first_improvement
 from meta_sa import simulated_annealing
 
 
 if __name__ == "__main__":
-    path = "prob-software2.txt"
+    path = "prob-software6.txt"
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
     print(f"Lido: m={m}, n={n}, ne={ne}, b={b}, instância: {path}")
 
     # semente global desta execução (armazena para reprodução)
-    #run_seed = int(time.time())  # semente baseada no relógio
-    run_seed = 20251003 # semente definida
+    run_seed = int(time.time())  # semente baseada no relógio
+    #run_seed = 20251003 # semente definida
     random.seed(run_seed)
 
     # ========== META 1: GRASP + Local Search (First) ==========
