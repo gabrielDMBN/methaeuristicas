@@ -2,20 +2,6 @@
 ------TABELA METRICAS-----
 | instance_path      | método         | média best_value | média total_weight | média time_seconds |  n |
 | ------------------ | -------------- | ---------------: | -----------------: | -----------------: | -: |
-| prob-software.txt  | GRASP+LS_FIRST |         11425.67 |           12167.00 |             0.4136 |  3 |
-| prob-software.txt  | SA_FAST        |         11425.67 |           12167.00 |             0.4351 |  3 |
-| prob-software2.txt | GRASP+LS_FIRST |         10985.67 |           49765.00 |             4.9983 |  3 |
-| prob-software2.txt | SA_FAST        |         11055.67 |           49746.00 |             3.1885 |  3 |
-| prob-software3.txt | GRASP+LS_FIRST |         13985.33 |           11195.33 |             0.5525 |  3 |
-| prob-software3.txt | SA_FAST        |         14003.00 |           11193.00 |             0.4500 |  3 |
-| prob-software4.txt | GRASP+LS_FIRST |         11966.33 |           25592.67 |             1.7465 |  3 |
-| prob-software4.txt | SA_FAST        |         12093.00 |           25576.00 |             1.4433 |  3 |
-| prob-software5.txt | GRASP+LS_FIRST |         13165.00 |           15118.67 |             0.5897 |  3 |
-| prob-software5.txt | SA_FAST        |         13170.33 |           15111.00 |             0.5345 |  3 |
-| prob-software6.txt | GRASP+LS_FIRST |         10647.33 |           45891.67 |             3.2979 |  3 |
-| prob-software6.txt | SA_FAST        |         10597.00 |           45890.67 |             2.9163 |  3 |
-| prob-software7.txt | GRASP+LS_FIRST |          9580.67 |           67456.67 |             7.8321 |  3 |
-| prob-software7.txt | SA_FAST        |          9612.00 |           67478.00 |             4.6505 |  3 |
 | prob-software8.txt | GRASP+LS_FIRST |         12813.30 |           11991.70 |             0.5283 |  3 |
 | prob-software8.txt | SA_FAST        |         12813.00 |           11982.30 |             0.4219 |  3 |
 | prob-software9.txt | GRASP+LS_FIRST |         11333.30 |           38872.00 |             2.7756 |  3 |
@@ -25,53 +11,6 @@
 
 
 
-
-
--------DADOS DAS EXECUÇÕES INDIVIDUAIS (caminhos e mais informações de cada execução em experimentos.txt)------
-
-instance_path,method,best_value,total_weight,time_seconds
-prob-software.txt,GRASP+LS_FIRST,11501,12180,0.417106
-prob-software.txt,SA_FAST,11501,12180,0.422755
-prob-software.txt,GRASP+LS_FIRST,11427,12173,0.408442
-prob-software.txt,SA_FAST,11427,12173,0.455594
-prob-software.txt,GRASP+LS_FIRST,11349,12148,0.413338
-prob-software.txt,SA_FAST,11349,12148,0.426817
-prob-software2.txt,GRASP+LS_FIRST,10913,49806,4.922068
-prob-software2.txt,SA_FAST,10913,49784,3.227040
-prob-software2.txt,GRASP+LS_FIRST,11165,49786,5.011923
-prob-software2.txt,SA_FAST,11090,49679,3.102367
-prob-software2.txt,GRASP+LS_FIRST,10879,49703,5.061024
-prob-software2.txt,SA_FAST,11164,49774,3.235952
-prob-software3.txt,GRASP+LS_FIRST,13950,11200,0.548678
-prob-software3.txt,SA_FAST,14003,11193,0.461685
-prob-software3.txt,GRASP+LS_FIRST,14003,11193,0.553615
-prob-software3.txt,SA_FAST,14003,11193,0.451973
-prob-software3.txt,GRASP+LS_FIRST,14003,11193,0.555056
-prob-software3.txt,SA_FAST,14003,11193,0.436440
-prob-software4.txt,GRASP+LS_FIRST,12190,25571,1.799443
-prob-software4.txt,SA_FAST,11899,25587,1.483514
-prob-software4.txt,GRASP+LS_FIRST,11829,25612,1.676765
-prob-software4.txt,SA_FAST,12190,25571,1.421055
-prob-software4.txt,GRASP+LS_FIRST,11880,25595,1.763159
-prob-software4.txt,SA_FAST,12190,25571,1.425283
-prob-software5.txt,GRASP+LS_FIRST,13144,15020,0.586479
-prob-software5.txt,SA_FAST,13144,15020,0.536129
-prob-software5.txt,GRASP+LS_FIRST,13145,15185,0.589020
-prob-software5.txt,SA_FAST,13161,15162,0.521013
-prob-software5.txt,GRASP+LS_FIRST,13206,15151,0.591733
-prob-software5.txt,SA_FAST,13206,15151,0.546331
-prob-software6.txt,GRASP+LS_FIRST,10788,45911,3.380138
-prob-software6.txt,SA_FAST,10788,45911,2.980317
-prob-software6.txt,GRASP+LS_FIRST,10488,45870,3.375980
-prob-software6.txt,SA_FAST,10237,45867,2.951096
-prob-software6.txt,GRASP+LS_FIRST,10666,45894,3.137774
-prob-software6.txt,SA_FAST,10666,45894,2.817486
-prob-software7.txt,GRASP+LS_FIRST,9598,67411,7.790177
-prob-software7.txt,SA_FAST,9773,67446,4.849027
-prob-software7.txt,GRASP+LS_FIRST,9758,67472,8.187851
-prob-software7.txt,SA_FAST,9755,67493,4.526443
-prob-software7.txt,GRASP+LS_FIRST,9386,67487,7.518366
-prob-software7.txt,SA_FAST,9308,67495,4.576148
 
 =======execucoes individuais das instancias da maratona======
 
