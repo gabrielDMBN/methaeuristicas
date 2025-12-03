@@ -5,7 +5,7 @@ from TowerType import TowerType
 from TDInstance import TDInstance
 from TDSolution import TDSolution
 from MapLoader import build_instance_from_ascii, load_instance_from_txt
-from visualize import show_instance_grid
+from visualize import show_instance_grid, show_solution_grid
 
 # ============================================================
 # Instância de teste simples
@@ -91,13 +91,13 @@ def hill_climb(instance, sol, iters=30, seed=0):
 # ============================================================
 
 def main():
-    seed = 40
+    seed = random.randint(0, 10000)
     rnd = random.Random(seed)
 
     tower_types = create_tower_types()
 
     # 🔢 escolha da instância só pelo número
-    instance_id = 2  # <- aqui você troca para 2, 3, 4...
+    instance_id = 2 #rand # <- aqui você troca para 2, 3, 4...
     instance = load_instance_from_txt(instance_id, tower_types)
 
     print(f"Instância {instance_id} carregada:")
@@ -106,7 +106,7 @@ def main():
     print(f"  Path length: {len(instance.path)}")
     print(f"  Budget: {instance.budget}\n")
 
-    show_instance_grid(instance, title=f"Mapa Tower Defense - Instância {instance_id}")
+    show_instance_grid(instance, title=f"Mapa Inicial - Instância {instance_id}")
 
     init_sol = random_initial_solution(instance, rnd)
     print("Solução inicial:")
@@ -115,6 +115,9 @@ def main():
 
     best = hill_climb(instance, init_sol, iters=40, seed=seed)
     print("\nMelhor dano:", best.total_damage(instance))
+
+    show_solution_grid(instance, best,
+                       title=f"Mapa com Torres - Instância {instance_id}")
 
 
 if __name__ == "__main__":
