@@ -1,0 +1,8 @@
+BUDGET 250
+XXXXPPPPPPPP......
+X...P...X..P..PPP.
+X...P...X..P..P.P.
+PPP.P...X..P..P.P.
+P.P.P...X..PPPP.P.
+P.P.P...X.......P.
+S.PPP...X....EPPP.
