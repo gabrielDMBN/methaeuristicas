@@ -135,11 +135,11 @@ def main():
     else:
         grasp_params = {"max_iters": 6, "alpha": 0.3, "ls_max_iters": 12}
 
-    #grasp_params = {"max_iters": 20, "alpha": 0.3, "ls_max_iters": 50}
+    grasp_params = {"max_iters": 10, "alpha": 0.3, "ls_max_iters": 25} # ajuste fixo para teste =====================================================================================
 
     print("\n=== Rodando GRASP + Local Search ===")
     t0 = time.perf_counter()
-    best_grasp = grasp_td(instance, grasp_params, seed=seed + 1)  # seed+1 só pra variar
+    best_grasp = grasp_td(instance, grasp_params, seed=seed)  # seed
     grasp_time = time.perf_counter() - t0
 
     grasp_damage = best_grasp.total_damage(instance)
@@ -157,7 +157,7 @@ def main():
         RESULTS_FILE,
         instance_label=instance_label,
         method="GRASP+LS",
-        seed=seed + 1,
+        seed=seed,
         damage=grasp_damage,
         cost=grasp_cost,
         budget=instance.budget,

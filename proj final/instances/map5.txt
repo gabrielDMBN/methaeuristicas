@@ -1,4 +1,4 @@
-BUDGET 250
+BUDGET 300
 XXXXPPPPPPPP......
 X...P...X..P..PPP.
 X...P...X..P..P.P.

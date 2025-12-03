@@ -1,4 +1,4 @@
-BUDGET 250
+BUDGET 220
 .S.......E.X
 .P.PPP.PPP.X
 .P.P.P.P...X
