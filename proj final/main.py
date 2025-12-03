@@ -7,6 +7,7 @@ from TDSolution import TDSolution
 from MapLoader import build_instance_from_ascii, load_instance_from_txt
 from visualize import show_instance_grid, show_solution_grid
 from TDMetaSA import simulated_annealing_td
+from TDMetaGRASP import grasp_td
 
 # ============================================================
 # Instância de teste simples
@@ -46,42 +47,74 @@ def random_initial_solution(instance, rnd):
 # ============================================================
 
 def main():
-    seed = random.randint(0, 10000)
+    # =================== SEED ===================
+    seed = random.randint(0, 100000)
+    print(f"Seed sorteada para esta execução: {seed}")
     rnd = random.Random(seed)
 
+    # =================== INSTÂNCIA ===================
     tower_types = create_tower_types()
 
-    instance_id = 6
+    instance_id = 6  # ajuste aqui para 1,2,3,... conforme seus arquivos
     instance = load_instance_from_txt(instance_id, tower_types)
 
-    print(f"Instância {instance_id} carregada:")
+    print(f"\nInstância {instance_id} carregada:")
     print(f"  Grid: {instance.width}x{instance.height}")
     print(f"  Buildable cells: {len(instance.buildable_cells)}")
     print(f"  Path length: {len(instance.path)}")
     print(f"  Budget: {instance.budget}\n")
 
+    # Mapa inicial (sem torres)
     show_instance_grid(instance, title=f"Mapa Inicial - Instância {instance_id}")
 
+    # =================== SOLUÇÃO INICIAL ===================
     init_sol = random_initial_solution(instance, rnd)
-    print("Solução inicial:")
+    print("Solução inicial (aleatória):")
     print(f"  Custo: {init_sol.total_cost(instance)}/{instance.budget}")
-    print(f"  Dano: {init_sol.total_damage(instance):.2f}")
+    print(f"  Dano : {init_sol.total_damage(instance):.2f}\n")
 
+    # =================== META 1: SIMULATED ANNEALING ===================
     sa_params = {
-        "T0": 80,
-        "alpha": 0.95,
+        "T0": 80.0,
+        "alpha": 0.90,
         "SAmax": 120,
         "Tfinal": 1e-3,
         "max_neighbor_trials": 8,
     }
 
-    best = simulated_annealing_td(instance, init_sol, sa_params, seed=seed)
-    print("\nMelhor dano (SA):", best.total_damage(instance))
+    print("\n=== Rodando Simulated Annealing ===")
+    best_sa = simulated_annealing_td(instance, init_sol, sa_params, seed=seed)
 
+    print("\n=== Resultado SA ===")
+    print(f"Melhor dano (SA): {best_sa.total_damage(instance):.2f}")
+    print(f"Custo (SA):       {best_sa.total_cost(instance)}/{instance.budget}\n")
+
+    # Mapa com torres escolhidas pelo SA
     show_solution_grid(
         instance,
-        best,
+        best_sa,
         title=f"Mapa com Torres (SA) - Instância {instance_id}"
+    )
+
+    # =================== META 2: GRASP + Local Search ===================
+    grasp_params = {
+        "max_iters": 20,
+        "alpha": 0.3,
+        "ls_max_iters": 50,
+    }
+
+    print("\n=== Rodando GRASP + Local Search ===")
+    best_grasp = grasp_td(instance, grasp_params, seed=seed + 1)  # pode usar seed+1 pra variar
+
+    print("\n=== Resultado GRASP+LS ===")
+    print(f"Melhor dano (GRASP+LS): {best_grasp.total_damage(instance):.2f}")
+    print(f"Custo (GRASP+LS):       {best_grasp.total_cost(instance)}/{instance.budget}\n")
+
+    # Mapa com torres escolhidas pelo GRASP+LS
+    show_solution_grid(
+        instance,
+        best_grasp,
+        title=f"Mapa com Torres (GRASP+LS) - Instância {instance_id}"
     )
 
 
