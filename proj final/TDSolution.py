@@ -49,3 +49,7 @@ class TDSolution:
 
     def __repr__(self):
         return f"TDSolution(assignments={self.assignments})"
+
+    def copy(self):
+        """Retorna uma cópia independente da solução atual."""
+        return TDSolution(self.assignments.copy())

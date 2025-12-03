@@ -6,6 +6,7 @@ from TDInstance import TDInstance
 from TDSolution import TDSolution
 from MapLoader import build_instance_from_ascii, load_instance_from_txt
 from visualize import show_instance_grid, show_solution_grid
+from TDMetaSA import simulated_annealing_td
 
 # ============================================================
 # Instância de teste simples
@@ -40,52 +41,6 @@ def random_initial_solution(instance, rnd):
 
     return sol
 
-
-# ============================================================
-# Hill-Climb simples
-# ============================================================
-
-def hill_climb(instance, sol, iters=30, seed=0):
-    rnd = random.Random(seed)
-
-    current = TDSolution(sol.assignments[:])
-    current_value = current.total_damage(instance)
-
-    print("\n===== HILL CLIMB =====")
-    print(f"Inicial -> custo {current.total_cost(instance)}/{instance.budget} | dano {current_value:.2f}")
-
-    for it in range(1, iters + 1):
-        pos = rnd.randrange(instance.num_buildable())
-        old = current.assignments[pos]
-
-        num_types = len(instance.tower_types)
-        candidates = [-1] + list(range(num_types))
-        candidates.remove(old)
-        new = rnd.choice(candidates)
-
-        candidate = TDSolution(current.assignments[:])
-        candidate.assignments[pos] = new
-
-        new_value = candidate.total_damage(instance)
-
-        print(f"[Iter {it}] Mudando célula {pos}: {old} → {new}")
-        print(f"    dano atual = {current_value:.2f} | dano vizinho = {new_value:.2f}")
-
-        if new_value > current_value:
-            print("    Aceitou!")
-            current = candidate
-            current_value = new_value
-        else:
-            print("    Rejeitou.")
-
-    print("\n=== FINAL ===")
-    print(f"Dano final: {current_value:.2f}")
-    print(f"Custo final: {current.total_cost(instance)}/{instance.budget}")
-    print(f"Solução: {current.assignments}")
-
-    return current
-
-
 # ============================================================
 # MAIN
 # ============================================================
@@ -96,8 +51,7 @@ def main():
 
     tower_types = create_tower_types()
 
-    # 🔢 escolha da instância só pelo número
-    instance_id = 2 #rand # <- aqui você troca para 2, 3, 4...
+    instance_id = 6
     instance = load_instance_from_txt(instance_id, tower_types)
 
     print(f"Instância {instance_id} carregada:")
@@ -113,11 +67,22 @@ def main():
     print(f"  Custo: {init_sol.total_cost(instance)}/{instance.budget}")
     print(f"  Dano: {init_sol.total_damage(instance):.2f}")
 
-    best = hill_climb(instance, init_sol, iters=40, seed=seed)
-    print("\nMelhor dano:", best.total_damage(instance))
+    sa_params = {
+        "T0": 80,
+        "alpha": 0.95,
+        "SAmax": 120,
+        "Tfinal": 1e-3,
+        "max_neighbor_trials": 8,
+    }
 
-    show_solution_grid(instance, best,
-                       title=f"Mapa com Torres - Instância {instance_id}")
+    best = simulated_annealing_td(instance, init_sol, sa_params, seed=seed)
+    print("\nMelhor dano (SA):", best.total_damage(instance))
+
+    show_solution_grid(
+        instance,
+        best,
+        title=f"Mapa com Torres (SA) - Instância {instance_id}"
+    )
 
 
 if __name__ == "__main__":
