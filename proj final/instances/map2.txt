@@ -1,0 +1,8 @@
+BUDGET 250
+.S.......E.X
+.P.PPP.PPP.X
+.P.P.P.P...X
+.P.P.P.P...X
+.P.P.P.P...X
+.PPP.PPP...X
+.........XXX

@@ -4,38 +4,19 @@ import random
 from TowerType import TowerType
 from TDInstance import TDInstance
 from TDSolution import TDSolution
-from MapLoader import build_instance_from_ascii
+from MapLoader import build_instance_from_ascii, load_instance_from_txt
 from visualize import show_instance_grid
 
 # ============================================================
 # Instância de teste simples
 # ============================================================
 
-def create_instance_from_ascii() -> TDInstance:
-    # Mapa ASCII: primeira linha = y=0 (baixo)
-    ascii_map = [
-        "XXXXXXXXXX",
-        "X........X",
-        "X.SPPPP.EX",
-        "X........X",
-        "XXXXXXXXXX",
-    ]
-
-    tower_types = [
+def create_tower_types():
+    return [
         TowerType(0, "Fraca", 20, 1.5, 5.0),
         TowerType(1, "Média", 35, 2.5, 8.0),
         TowerType(2, "Forte", 50, 3.5, 12.0),
     ]
-
-    budget = 200
-
-    instance = build_instance_from_ascii(
-        map_lines=ascii_map,
-        tower_types=tower_types,
-        budget=budget,
-    )
-    return instance
-
 
 # ============================================================
 # Solução inicial aleatória
@@ -110,32 +91,30 @@ def hill_climb(instance, sol, iters=30, seed=0):
 # ============================================================
 
 def main():
-    instance = create_instance_from_ascii()
+    seed = 40
+    rnd = random.Random(seed)
 
-    print("Instância carregada:")
+    tower_types = create_tower_types()
+
+    # 🔢 escolha da instância só pelo número
+    instance_id = 2  # <- aqui você troca para 2, 3, 4...
+    instance = load_instance_from_txt(instance_id, tower_types)
+
+    print(f"Instância {instance_id} carregada:")
     print(f"  Grid: {instance.width}x{instance.height}")
     print(f"  Buildable cells: {len(instance.buildable_cells)}")
     print(f"  Path length: {len(instance.path)}")
-    print(f"  Path (primeiros 10): {instance.path[:10]}")
-    print(f"  Tipos de torres: {len(instance.tower_types)}")
     print(f"  Budget: {instance.budget}\n")
 
-    # Visualização
-    show_instance_grid(instance, title="Mapa Tower Defense - ASCII")
-
-    # resto do código igual: solução aleatória, hill-climb, etc.
-    seed = 42 #
-    rnd = random.Random(seed)
-
-    from main import random_initial_solution, hill_climb  # se estiver em outro módulo, ajustar
+    show_instance_grid(instance, title=f"Mapa Tower Defense - Instância {instance_id}")
 
     init_sol = random_initial_solution(instance, rnd)
     print("Solução inicial:")
-    print(f"  Assignments: {init_sol.assignments}")
     print(f"  Custo: {init_sol.total_cost(instance)}/{instance.budget}")
     print(f"  Dano: {init_sol.total_damage(instance):.2f}")
 
-    hill_climb(instance, init_sol, iters=40, seed=seed)
+    best = hill_climb(instance, init_sol, iters=40, seed=seed)
+    print("\nMelhor dano:", best.total_damage(instance))
 
 
 if __name__ == "__main__":
