@@ -8,13 +8,12 @@ from meta_sa import simulated_annealing
 
 if __name__ == "__main__":
     path = "prob-software9.txt"
-    #prob-software8 ,prob-software9, prob-software10 instancias da maratona (2,7,28 respectivamente)
     m, n, ne, b, c, a, pkg_deps = read_instance(path)
     print(f"Lido: m={m}, n={n}, ne={ne}, b={b}, instância: {path}")
 
     #=====Seeds=====
     run_seed = int(time.time())  # semente baseada no relógio
-    #run_seed = 1760711790 # semente definida
+    #run_seed = xxxxxxxxxx # semente definida
     random.seed(run_seed)
 
     # ========== META 1: GRASP + Local Search (First fit) ==========

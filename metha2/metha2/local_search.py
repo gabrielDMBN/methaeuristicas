@@ -1,7 +1,7 @@
 from typing import List, Set, Tuple
 from utils import solution_value, solution_weight
 
-##ATIVIDADE 2 - BUSCA LOCAL -----------------------------------
+##BUSCA LOCAL -----------------------------------
 
 # funcao auxiliar para busca local,retorna o conjunto de todas as dependências exigidas pelos pacotes selecionados.
 def deps_of_solution(selected, pkg_deps):
